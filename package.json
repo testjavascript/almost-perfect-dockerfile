@@ -1,0 +1,32 @@
+{
+  "name": "almost-perfect-dockerfile",
+  "version": "0.0.1",
+  "description": "Demonstrate and collaborate on dockerfile best practices for Node.js",
+  "main": "./dist/index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "start:dev": "ts-node ./src/index.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/testjavascript/almost-perfect-dockerfile.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/testjavascript/almost-perfect-dockerfile/issues"
+  },
+  "homepage": "https://github.com/testjavascript/almost-perfect-dockerfile#readme",
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.3"
+  }
+}
