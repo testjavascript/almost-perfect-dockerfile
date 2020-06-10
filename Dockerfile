@@ -1,19 +1,22 @@
-FROM node:12-slim AS base
-LABEL Description="Some desc"
-WORKDIR "/app"
-#ADD VERSION .
+# syntax = docker/dockerfile:1.0-experimental
 
-FROM base AS build
-COPY package.json /app/
-COPY package-lock.json /app/
-RUN npm install
-COPY . .
+#✅ Prefer small images
+FROM node:12-slim AS build
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+ARG SOME_SECRETY_KEY
+RUN --mount=type=secret,id=npm,target=/root/.npmrc npm install
+COPY src tsconfig*.json ./
 RUN npm run build
 
+FROM build AS dev
+EXPOSE 9229
+CMD ["npm", "run", "start:dev"]
+
 FROM build AS prod
-COPY --from=build /app/dist/ /app/dist/
+EXPOSE 3000/tcp
+COPY --from=build /usr/src/app/dist ./dist/
+COPY --from=build /usr/src/app/package.json ./
 RUN npm ci --production && npm cache clean --force
 USER node
-EXPOSE 3000
-CMD node dist/index.js
-EXPOSE 3000
+CMD ["node", "dist/index.js"]

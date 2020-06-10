@@ -1,6 +1,7 @@
 import express from "express";
 import { Router, Request, Response, NextFunction, Application } from "express";
 
+
 let app: Application = express();
 app.listen(3000);
 const router: Router = Router();
@@ -15,5 +16,11 @@ router.get("/demo", async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
+
+process.on('SIGTERM', ()=>{
+  console.log('siterm')
+})
+
+
 
 app.use(router);
