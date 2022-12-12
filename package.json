@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/testjavascript/almost-perfect-dockerfile#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "pino": "^6.3.2",
     "sequelize": "^5.21.12"
   },
